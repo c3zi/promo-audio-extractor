@@ -47,7 +47,7 @@
         ],
         "logs": [
             "mkdir -p logs",
-            "touch app.log",
+            "touch logs/app.log",
             "chmod -R 777 logs"
         ]
     }
