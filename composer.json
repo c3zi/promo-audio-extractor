@@ -39,6 +39,9 @@
             "./vendor/bin/parallel-lint --exclude vendor .",
             "./vendor/bin/phpcs -s src tests",
             "./vendor/bin/phpunit"
+        ],
+        "storage": [
+            "mkdir -p storage/test"
         ]
     }
 }
