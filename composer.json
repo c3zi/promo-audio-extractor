@@ -46,7 +46,8 @@
             "chmod -R 777 storage"
         ],
         "logs": [
-            "mkdir -p logs/app.log",
+            "mkdir -p logs",
+            "touch app.log",
             "chmod -R 777 logs"
         ]
     }
