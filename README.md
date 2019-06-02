@@ -5,7 +5,7 @@
 1. Make sure you have installed `git`
 1. Clone repository: git clone https://github.com/c3zi/promo-audio-extractor.git
 1. Install ffmpeg library `sudo apt-get update && sudo apt-get install ffmpeg`
-1. Install all dependencies using composer: `composer install`
+1. Install all dependencies using composer: `composer install --no-dev`
 1. Prepare storage directory: `composer storage`
 1. Make sure that storage directory is writable
 1. Run `composer start` command to start PHP server (8080 port) 
@@ -22,7 +22,7 @@
    3. sudo chmod +x /usr/local/bin/docker-compose
  
 1. `docker-compose up -d`
-1. `docker-compose exec application composer install`
+1. `docker-compose exec application composer install --no-dev`
 1. `docker-compose exec application composer storage`
 1. Make sure that storage directory is writable
 
@@ -42,7 +42,7 @@ API consists of two endpoints:
 * id can be taken from the first endpoint 
 
 ### Quality
-To run unit tests execute: `composer qa`
+To run code quality checks just run a command: `composer qa`
 
 It runs three commands:
 
@@ -51,3 +51,5 @@ It runs three commands:
 2. ```./vendor/bin/phpcs -s src tests```
 
 3. ```./vendor/bin/phpunit```
+
+* Be sure that you have installed composer `dev` dependencies
