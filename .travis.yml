@@ -19,6 +19,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -y ffmpeg
   - composer self-update
+  - composer storage
 
 install:
   - composer install

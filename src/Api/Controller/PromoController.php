@@ -48,11 +48,13 @@ class PromoController extends BaseController
             $audio = $this->audioExtractor->extract($tag);
         } catch (DomainException $exception) {
             $data = [
-                'code' => ResponseCode::HTTP_BAD_REQUEST,
-                'message' => $exception->getMessage()
+                'code' => ResponseCode::HTTP_INTERNAL_ERROR,
+                'message' => 'Internal error',
             ];
 
-            return $this->json($response, $data, ResponseCode::HTTP_BAD_REQUEST);
+            // @todo the exception should be reported in entry log (i.e. Monolog)
+
+            return $this->json($response, $data, ResponseCode::HTTP_INTERNAL_ERROR);
         }
 
         $data = [

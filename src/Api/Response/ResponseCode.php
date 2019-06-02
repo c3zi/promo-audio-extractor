@@ -52,4 +52,5 @@ class ResponseCode
     public const HTTP_UNPROCESSABLE_ENTITY = 422;                                        // RFC4918
     public const HTTP_LOCKED = 423;                                                      // RFC4918
     public const HTTP_FAILED_DEPENDENCY = 424;
+    public const HTTP_INTERNAL_ERROR = 500;
 }
