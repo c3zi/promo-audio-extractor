@@ -1,0 +1,27 @@
+language: php
+sudo: required
+
+env:
+  global:
+    - MIN_PHP=7.2
+
+matrix:
+  include:
+    - php: "7.2"
+  fast_finish: true
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+before_install:
+  - sudo add-apt-repository -y ppa:mc3man/trusty-media
+  - sudo apt-get update
+  - sudo apt-get install -y ffmpeg
+  - composer self-update
+
+install:
+  - composer install
+
+script:
+  - ./composer qa
