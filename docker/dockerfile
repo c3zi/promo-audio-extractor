@@ -1,0 +1,9 @@
+FROM php:7.2-fpm
+
+RUN apt-get update && apt-get install -y ffmpeg wget git unzip
+
+# composer
+RUN wget https://getcomposer.org/installer --quiet --output-document=/tmp/composer-setup.php \
+    && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && rm /tmp/composer-setup.php
+

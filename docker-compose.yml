@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  application:
+    build:
+      context: ./docker
+      dockerfile: ./dockerfile
+    working_dir: /promo
+    volumes:
+      - .:/promo
+
+  webserver:
+    image: nginx:alpine
+    working_dir: /promo/public
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./public:/promo/public
+    ports:
+      - "8080:80"
+
