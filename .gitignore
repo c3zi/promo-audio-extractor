@@ -4,3 +4,4 @@ code-coverage/
 storage/
 .phpunit.result.cache
 .phpcs-cache
+logs/

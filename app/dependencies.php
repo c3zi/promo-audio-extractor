@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use Monolog\Processor\UidProcessor;
 use Promo\VideoProcessor\Domain\Service\AudioProcessor;
 use Promo\VideoProcessor\Domain\Service\VideoDownloader;
 use Promo\VideoProcessor\Domain\Service\VideoFinder;
@@ -12,6 +15,7 @@ use Promo\VideoProcessor\Infrastructure\Service\CrawlVideoFinder;
 use Promo\VideoProcessor\Infrastructure\Storage\Filesystem;
 use Promo\VideoProcessor\Api\Controller\PromoController;
 use DI\Container;
+use Psr\Log\LoggerInterface;
 use Slim\App;
 
 return static function (App $app) {
@@ -46,10 +50,22 @@ return static function (App $app) {
         );
     });
 
-
-
     $container->set(PromoController::class, static function (Container $c) {
         return new PromoController($c->get(AudioExtractor::class), $c->get(Storage::class));
     });
 
+    $container->set(LoggerInterface::class, static function (Container $c) {
+        $settings = $c->get('settings');
+
+        $loggerSettings = $settings['logger'];
+        $logger = new Logger($loggerSettings['name']);
+
+        $processor = new UidProcessor();
+        $logger->pushProcessor($processor);
+
+        $handler = new StreamHandler($loggerSettings['path'], $loggerSettings['level']);
+        $logger->pushHandler($handler);
+
+        return $logger;
+    });
 };
